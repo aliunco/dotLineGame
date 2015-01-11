@@ -4,3 +4,4 @@ var mousedown = false;
 var lines = [];
 var prevNode;
 var passedNodes = [];
+var prevLinesName = [];

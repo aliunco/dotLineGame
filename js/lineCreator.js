@@ -30,8 +30,22 @@ newLine.prototype.changeEndOfLine = function(X, Y){
 		if(X < this.startLineX && Y < this.startLineY){
 			angle = 180 + angle;
 		}
-		if (X > this.startLineX && Y < this.startLineX) {
+		if (X > this.startLineX && Y < this.startLineY) {
 			angle = 360 - angle;
+		}
+		if(X == this.startLineX){
+			if (Y < this.startLineY) {
+				angle = 270;
+			}else{
+				angle = 90;
+			}
+		}
+		if (Y == this.startLineY) {
+			if (X < this.startLineX) {
+				angle = 180;
+			}else{
+				angle = 0;
+			}
 		};
 		this.ThisLine.style.webkitTransform = 'rotate('+angle+'deg)'; 
 	    this.ThisLine.style.mozTransform    = 'rotate('+angle+'deg)'; 

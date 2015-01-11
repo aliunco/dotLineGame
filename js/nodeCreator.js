@@ -26,11 +26,11 @@ NewNode.prototype.NodeNotSelectedReset = function(ThisAlterNode){
 NewNode.prototype.resetNode = function(ThisAlterNode){
 	try{
 		this.ThisNode.className = this.ThisNode.className.replace(' nearToBeSelected','');
-		this.ThisNode.className = this.ThisNode.className.replace(' selected','');
+		this.ThisNode.className = this.ThisNode.className.replace(' Selected','');
 	}
 	catch(err){
 		this.className = this.className.replace(' nearToBeSelected','');
-		this.className = this.className.replace(' selected','');
+		this.className = this.className.replace(' Selected','');
 	}
 }
 NewNode.prototype.nearToSelected = function(ThisAlterNode){
@@ -42,9 +42,9 @@ NewNode.prototype.nearToSelected = function(ThisAlterNode){
 }
 NewNode.prototype.selected = function(ThisAlterNode){
 	try{
-		this.ThisNode.className += " selected";
+		this.ThisNode.className += " Selected";
 	}catch(err){
-		this.className += " selected";
+		this.className += " Selected";
 	}
 }
 NewNode.prototype.deleteNode = function(){
