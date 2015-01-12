@@ -1,0 +1,21 @@
+{
+	"nodes":{
+		"node1":{
+			"X": 2,
+			"Y": 8
+		},
+		"node2":{
+			"X": 5,
+			"Y": 2
+		},
+		"node3":{
+			"X": 8,
+			"Y": 8
+		}
+	},
+	"lines":[
+		"node1-node2",
+		"node1-node3",
+		"node2-node3"
+	]
+}

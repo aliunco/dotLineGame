@@ -5,3 +5,6 @@ var lines = [];
 var prevNode;
 var passedNodes = [];
 var prevLinesName = [];
+var levelDefault = 1;
+var LevelJson;
+var mouse;

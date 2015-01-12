@@ -11,7 +11,8 @@ function isEmptyObject(obj) {
   }
   return true;
 }
-function ClearThePlate(){
+// ---------------- reset the plate but not clearing the nodes of currect level ----------
+function ResetLevelsPlate(){
 	for (var lineKey in lines) {
 		lines[lineKey].deleteLine();
 		delete lines[lineKey];
@@ -22,6 +23,10 @@ function ClearThePlate(){
 	prevLinesName = [];
 	passedNodes = [];	
 }
+function ClearThePlate(){
+	ResetLevelsPlate();
+	
+}
 // ------------ node griding --------------
 var nodePlaces = [];
 for (var i = 1; i <= 10; i++) {
@@ -31,4 +36,17 @@ for (var j = 1 ; j <= 10; j++) {
 	for (var i = 1; i <= 10; i++) {
 		nodePlaces[i][j] = [40*i, 40 * j];
 	};
-};
+}
+// ------------- Load Json file for level structures --------------
+function loadJSON(url, callback) {   
+    var xobj = new XMLHttpRequest();
+	xobj.overrideMimeType("application/json");
+	xobj.open('GET', url, true);
+	xobj.setRequestHeader("Cache-Control", "no-cache");
+	xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            callback(JSON.parse(xobj.responseText));
+          }
+    };
+    xobj.send(null);  
+}
