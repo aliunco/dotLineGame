@@ -66,13 +66,17 @@ function GameStructure(){
 GameStructure.prototype.checkSolution = function(){
 	var MustHaveLines = LevelJson.lines;
 	var resultOfSolution = true;
-	for (var i = MustHaveLines.length - 1; i >= 0; i--) {
-		var LineNodes = MustHaveLines[i].split("-");
-		if ((DrewLines.indexOf((LineNodes[0]+LineNodes[1]).toString()) == -1) && (DrewLines.indexOf((LineNodes[1]+LineNodes[0]).toString()) == -1)) {
-			resultOfSolution = false;
-			break;
-		}
-	};
+	if (DrewLines.length == LevelJson.lines.length) {
+		for (var i = MustHaveLines.length - 1; i >= 0; i--) {
+			var LineNodes = MustHaveLines[i].split("-");
+			if ((DrewLines.indexOf((LineNodes[0]+LineNodes[1]).toString()) == -1) && (DrewLines.indexOf((LineNodes[1]+LineNodes[0]).toString()) == -1)) {
+				resultOfSolution = false;
+				break;
+			}
+		};
+	}else{
+		resultOfSolution = false;
+	}
 	return resultOfSolution;
 }
 GameStructure.prototype.StartForNewLevel = function(){
