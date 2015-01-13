@@ -51,10 +51,10 @@ MouseListener.prototype.addToMouseUpFunc = function(NewFunc){
 			$log.info("Mouse stops!");
 			mousedown = false;
 			Super.MousePushed = false;
-		};
-		if (typeof(NewFunc) != "undefined" && typeof(NewFunc) == "function") {
-			NewFunc(mouseObj);	
-		};	
+			if (typeof(NewFunc) != "undefined" && typeof(NewFunc) == "function") {
+				NewFunc(mouseObj);	
+			}	
+		}
 	}
 }
 MouseListener.prototype.addToMouseMoveFunc = function(NewFunc){

@@ -20,12 +20,14 @@ function ResetLevelsPlate(){
 	for (var nodesKey in passedNodes) {
 		eval(passedNodes[nodesKey]).resetNode();	
 	};
-	prevLinesName = [];
 	passedNodes = [];	
+	DrewLines = [];
 }
-function ClearThePlate(){
-	ResetLevelsPlate();
-	
+function clearPrevLine(){
+	if (typeof(lines) != "undefined") {
+		lines[Object.keys(lines)[Object.keys(lines).length - 1]].deleteLine();
+		delete lines[Object.keys(lines)[Object.keys(lines).length - 1]];
+	}
 }
 // ------------ node griding --------------
 var nodePlaces = [];
@@ -50,3 +52,38 @@ function loadJSON(url, callback) {
     };
     xobj.send(null);  
 }
+// --------------- erase cookie -------------------
+function EraseCookie(CookieName) {
+    document.cookie = CookieName + "=; expires=Thu, 18 Dec 1 12:00:00 UTC"
+}
+// ---------------------- load cookie ------------------------
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+// ------------------ save cookie ---------------------------
+function setCookie(cname, cvalue, exdays) {
+    document.cookie = cname + "=" + cvalue + "; expires=" + exdays + ';';
+}
+// ------------------ remove item in array ---------------
+Object.defineProperty(Array.prototype, "remove", {
+    enumerable: false,
+    value: function (item) {
+        var removeCounter = 0;
+
+        for (var index = 0; index < this.length; index++) {
+            if (this[index] === item) {
+                this.splice(index, 1);
+                removeCounter++;
+                index--;
+            }
+        }
+        return removeCounter;
+    }
+});

@@ -1,6 +1,6 @@
-// node1 = new NewNode(nodePlaces[2][2][0], nodePlaces[2][2][1], plate, "node1");
 function LevelStructure(){
-	this.currentNodes = levelDefault;
+	this.currentLevel = levelDefault;
+	this.LoadLastSave();
 	this.levesAdress = "json/"
 	LevelSuper = this;
 }
@@ -9,7 +9,8 @@ LevelStructure.prototype.getJson = function(){
 		LevelJson = data;
 		LevelSuper.ImportNodesInPlate();
 	}
-	loadJSON(this.levesAdress + 'level' + this.currentNodes + '.json', ImportingJson);
+	loadJSON(this.levesAdress + 'level' + this.currentLevel + '.json', ImportingJson);
+	this.SaveTheGame();
 }
 LevelStructure.prototype.ImportNodesInPlate = function(){
 	for(var Thisnode in LevelJson.nodes){
@@ -20,4 +21,20 @@ LevelStructure.prototype.ClearNodes = function(){
 	for (var Thisnode in LevelJson.nodes) {
 		window[Thisnode].deleteNode();
 	}
+}
+LevelStructure.prototype.LoadLastSave = function(){
+	try{
+		this.currentLevel = parseInt(getCookie("levelMap"));
+	}
+	catch(err){
+		EraseCookie("levelMap");
+		this.currentLevel = 1;
+	}
+}
+LevelStructure.prototype.SaveTheGame = function(){
+	setCookie("levelMap", this.currentLevel, new Date(new Date().getTime() + 24 * 60 * 60 * 1000 * 30 * 6));
+}
+LevelStructure.prototype.NextLevel = function(){
+	this.currentLevel++;
+	this.getJson();
 }
