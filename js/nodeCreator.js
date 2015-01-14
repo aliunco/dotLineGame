@@ -55,3 +55,9 @@ NewNode.prototype.deleteNode = function(){
 		this.parentElement.removeChild(this);
 	}
 }
+NewNode.prototype.addClass = function(ThisClassName){
+	this.ThisNode.className += " " + ThisClassName;
+}
+NewNode.prototype.removeClass = function(ThisClassName){
+	this.ThisNode.className = this.ThisNode.className.replace(ThisClassName, "").trim();
+}

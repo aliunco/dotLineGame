@@ -17,27 +17,32 @@ function GameStructure(){
 	var mousemovefunc = function(mouseMovePlace){
 		if (mousedown == true && (!isEmptyObject(lines))) {
 			if(SuperStruture.checkSolution() != true){
-				var XPos = mouseMovePlace.pageX - plate.offsetParent.offsetLeft - 15;
-				var YPos = mouseMovePlace.pageY - plate.offsetParent.offsetTop - 15;
-				lines[prevNode].changeEndOfLine(XPos, YPos);
-				var target = mouseMovePlace.target || mouseMovePlace.srcElement; 
-				if (target.className.indexOf("nodeStyle") != -1 && target.getAttribute("objNAme") != prevNode) {
-					var nodeName = target.getAttribute("objNAme");
-					if ( DrewLines.indexOf((prevNode+nodeName).toString()) == -1 && DrewLines.indexOf((nodeName+prevNode).toString())== -1 ) {
-						var nodeXPos = target.offsetLeft + 10;
-						var nodeYPos = target.offsetTop + 5;
-						lines[prevNode].changeEndOfLine(nodeXPos, nodeYPos);
-						lines[prevNode+nodeName] = lines[prevNode];
-						delete lines[prevNode];
-						eval(nodeName).selected();
-						passedNodes.push(nodeName);
-						lines[nodeName] = new newLine(nodeXPos, nodeYPos, plate);
-						DrewLines.push(prevNode+nodeName);
-						prevNode = nodeName;
+				if (!SuperStruture.isFail()) {
+					var XPos = mouseMovePlace.pageX - plate.offsetParent.offsetLeft - 15;
+					var YPos = mouseMovePlace.pageY - plate.offsetParent.offsetTop - 15;
+					lines[prevNode].changeEndOfLine(XPos, YPos);
+					var target = mouseMovePlace.target || mouseMovePlace.srcElement; 
+					if (target.className.indexOf("nodeStyle") != -1 && target.getAttribute("objNAme") != prevNode) {
+						var nodeName = target.getAttribute("objNAme");
+						if ( DrewLines.indexOf((prevNode+nodeName).toString()) == -1 && DrewLines.indexOf((nodeName+prevNode).toString())== -1 ) {
+							var nodeXPos = target.offsetLeft + 10;
+							var nodeYPos = target.offsetTop + 5;
+							lines[prevNode].changeEndOfLine(nodeXPos, nodeYPos);
+							lines[prevNode+nodeName] = lines[prevNode];
+							delete lines[prevNode];
+							eval(nodeName).selected();
+							passedNodes.push(nodeName);
+							lines[nodeName] = new newLine(nodeXPos, nodeYPos, plate);
+							DrewLines.push(prevNode+nodeName);
+							prevNode = nodeName;
+						}
 					}
-				}
+				}else{
+					alert("haha");
+					mouse.MouseListenersOff();
+				}				
 			}else{
-				$log.error("fuck you");
+				SuperStruture.ShineTheSolution();
 				mouse.MouseListenersOff();
 			}
 		}
@@ -45,16 +50,21 @@ function GameStructure(){
 	var mouseupFunc = function(mouseUpPlace){
 		if (typeof(LevelJson) != "undefined" && draginig == true) {
 			draginig = false;
-			if (DrewLines.length == LevelJson.lines.length) {
-				if (this.checkSolution) {
-
-				}else{
-					
-				}
-			}else{
-				$log.info(lines);
+			if (!SuperStruture.checkSolution()) {
 				clearPrevLine();
 			}
+			for (var i = passedNodes.length - 1; i >= 0; i--) {
+				var thisNodeIsIncluded = false;
+				for (var j = DrewLines.length - 1; j >= 0; j--) {
+					if(DrewLines[j].indexOf(passedNodes[i]) > -1){
+						thisNodeIsIncluded = true;
+					}
+				}
+				if (thisNodeIsIncluded == false) {
+					window[passedNodes[i]].resetNode();
+					passedNodes.remove(passedNodes[i]);
+				};
+			};
 		}
 	}
 	mouse.addToMouseDownFunc(mouseclick);
@@ -78,6 +88,22 @@ GameStructure.prototype.checkSolution = function(){
 		resultOfSolution = false;
 	}
 	return resultOfSolution;
+}
+GameStructure.prototype.isFail = function(){
+	var result = false;
+	if (DrewLines.length >= LevelJson.lines.length && (!this.checkSolution())) {
+		result = true;
+	}
+	return result;
+}
+GameStructure.prototype.ShineTheSolution = function(){
+	DrewLines
+	for (var i = DrewLines.length - 1; i >= 0; i--) {
+		lines[DrewLines[i]].addClass('GoldBackGround');
+	};
+	for (var i = passedNodes.length - 1; i >= 0; i--) {
+		window[passedNodes[i]].addClass('GoldBackGround');
+	};
 }
 GameStructure.prototype.StartForNewLevel = function(){
 	mouse.MouseListenersOn();

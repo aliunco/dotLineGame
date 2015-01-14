@@ -24,10 +24,8 @@ LevelStructure.prototype.ClearNodes = function(){
 }
 LevelStructure.prototype.LoadLastSave = function(){
 	if ( typeof(parseInt(getCookie("levelMap"))) == "number" && getCookie("levelMap") ) {
-		$log.info("inja omad");
 		this.currentLevel = parseInt(getCookie("levelMap"));
 	}else{
-		$log.info("pakesh kard")
 		EraseCookie("levelMap");
 		this.currentLevel = 1;
 	}

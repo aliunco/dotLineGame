@@ -15,6 +15,16 @@
 	background: -o-linear-gradient(top, #b5bdc8 0%,#828c95 36%,#647993 100%); /* Opera 11.10+ */
 	background: -ms-linear-gradient(top, #b5bdc8 0%,#828c95 36%,#647993 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #b5bdc8 0%,#828c95 36%,#647993 100%); /* W3C */
+	transition: background 1s ease-in-out, box-shadow 1s ease-in;
+	-ms-transition: background 1s ease-in-out, box-shadow 1s ease-in;
+	-webkit-transition: background 1s ease-in-out, box-shadow 1s ease-in;
+	-o-transition: background 1s ease-in-out, box-shadow 1s ease-in;
+	-moz-transition: background 1s ease-in-out, box-shadow 1s ease-in;
+	-webkit-box-shadow: 0px 0px 0px;
+	box-shadow: 0px 0px 0px;
+	-moz-box-shadow: 0px 0px 0px;
+	-o-box-shadow: 0px 0px 0px;
+	-ms-box-shadow: 0px 0px 0px;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#647993',GradientType=0 ); /* IE6-9 */
 }
 .nodeStyle {
@@ -26,6 +36,7 @@
 	-moz-border-radius: 99px;
 	background: #b5bdc8;
 	transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
 	-webkit-transition: all 0.2s ease-in-out;
 	-o-transition: all 0.2s ease-in-out;
 	-moz-transition: all 0.2s ease-in-out;
@@ -36,6 +47,11 @@
 	background: -ms-linear-gradient(top, #b5bdc8 0%,#828c95 36%,#647993 100%);
 	background: linear-gradient(to bottom, #b5bdc8 0%,#828c95 36%,#647993 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5bdc8', endColorstr='#647993',GradientType=0 );
+	-webkit-box-shadow: 0px 0px 0px;
+	box-shadow: 0px 0px 0px;
+	-moz-box-shadow: 0px 0px 0px;
+	-o-box-shadow: 0px 0px 0px;
+	-ms-box-shadow: 0px 0px 0px;
 	position: absolute;
 	z-index: 3;
 }
@@ -102,7 +118,7 @@
 }
 .gameContainer{
 	cursor: url(../img/pencil.cur), default !important;
-	margin-top: 40px;
+	margin-top: 10px;
 	position: relative;
 	padding: 15px;
 	-webkit-touch-callout: none;
@@ -112,7 +128,7 @@
 	-ms-user-select: none;
 	-ms-touch-action: none;
 	touch-action: none;
-	background: #bbada0;
+	background: #B8B8B8;
 	border-radius: 6px;
 	width: 500px;
 	height: 500px;
@@ -121,7 +137,7 @@
 	box-sizing: border-box;
 }
 .plateContainer{
-	background: rgba(238, 228, 218, 0.35);
+	background: rgba(255, 255, 255, 0.35);
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -129,3 +145,83 @@
 /*************************************
 	containers and boxes - end
 **************************************/
+/*************************************
+	animations in web - start
+*************************************/
+@-webkit-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+@-moz-keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+@keyframes move-up {
+  0% {
+    top: 25px;
+    opacity: 1; }
+
+  100% {
+    top: -50px;
+    opacity: 0; } }
+.moveUpAnimate{
+	-webkit-animation: move-up 600ms ease-in;
+	-moz-animation: move-up 600ms ease-in;
+	animation: move-up 600ms ease-in;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+/* Background Gradient for Analagous Colors */
+.GoldBackGround
+{
+    background-color: #D46037 !important;
+	background: -moz-linear-gradient(top, #D46037 0%, #D4C937  36%, #D46037 100%) !important;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6F8498), color-stop(36%,#D46037 ), color-stop(100%,#D46037)) !important;
+	background: -webkit-linear-gradient(top, #D46037 0%,#D4C937  36%,#D46037 100%) !important;
+	background: -o-linear-gradient(top, #D46037 0%,#D4C937  36%,#D46037 100%) !important;
+	background: -ms-linear-gradient(top, ##D46037 0%,#D4C937  36%,#D46037 100%) !important;
+	background: linear-gradient(to bottom, #D46037 0%,#D4C937  36%,#D46037 100%) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#D46037', endColorstr='#D46037',GradientType=0 ) !important;
+	-webkit-box-shadow: 1px 1px 10px #FF4300;
+	-moz-box-shadow: 1px 1px 10px #FF4300;
+	-ms-box-shadow: 1px 1px 10px #FF4300;
+	-o-box-shadow: 1px 1px 10px #FF4300;
+	box-shadow: 1px 1px 10px #FF4300;
+}
+
+/*************************************
+	animations in web - end
+*************************************/
+/************************************
+	Timer And Score container - start
+************************************/
+.TimeContainer, .scoreContainer{
+	float: left;
+	padding: 10px;
+	background: rgb(161, 161, 161);
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 25px;
+	border: 5px solid grey;
+	color: white;
+}
+.scoreContainer{
+	float: right;
+}
+.clearfix{
+	clear: both;
+	margin: 0px 0px;
+	overflow: hidden;
+}

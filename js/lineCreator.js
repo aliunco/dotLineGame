@@ -60,3 +60,9 @@ newLine.prototype.deleteLine = function(){
 	this.ThisLine.parentElement.removeChild(this.ThisLine);
 	delete this;
 }
+newLine.prototype.addClass = function(ThisClassNAme){
+	this.ThisLine.className += " " + ThisClassNAme;
+}
+newLine.prototype.removeClass = function(ThisClassNAme){
+	this.ThisLine.className = this.ThisLine.className.replace(ThisClassNAme, "").trim();
+}
