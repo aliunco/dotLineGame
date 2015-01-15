@@ -1,5 +1,7 @@
 function GameStructure(){
 	mouse = new MouseListener(plate); 
+	this.FuncAfterWin = "";
+	this.FuncAfterLoose = "";
 	SuperStruture = this;
 	var mouseclick = function(mouseClickAct){
 		var target = mouseClickAct.target || mouseClickAct.srcElement;
@@ -15,7 +17,7 @@ function GameStructure(){
 		}
 	}
 	var mousemovefunc = function(mouseMovePlace){
-		if (mousedown == true && (!isEmptyObject(lines))) {
+		if (mousedown == true && (!isEmptyObject(lines)) && (typeof(lines[prevNode]) != "undefined")) {
 			if(SuperStruture.checkSolution() != true){
 				if (!SuperStruture.isFail()) {
 					var XPos = mouseMovePlace.pageX - plate.offsetParent.offsetLeft - 15;
@@ -38,12 +40,17 @@ function GameStructure(){
 						}
 					}
 				}else{
-					alert("haha");
+					if (typeof(SuperStruture.FuncAfterLoose) != "undefined" && typeof(SuperStruture.FuncAfterLoose) == "function") {
+						SuperStruture.FuncAfterLoose();
+					}
 					mouse.MouseListenersOff();
 				}				
 			}else{
 				SuperStruture.ShineTheSolution();
 				mouse.MouseListenersOff();
+				if (typeof(SuperStruture.FuncAfterWin) != "undefined" && typeof(SuperStruture.FuncAfterWin) == "function") {
+					SuperStruture.FuncAfterWin();
+				}
 			}
 		}
 	}
