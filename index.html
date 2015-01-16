@@ -11,24 +11,41 @@
 				<div class="scoreContainer">
 					Score: <span class="ScoreOfUSer">0</span>
 				</div>
+				<div class="TurnContainer">
+					Your Turns : <span class="YourTurn PopAnimated"></span>
+				</div>
 				<div class="TimeContainer">
 					<span class="Min">00</span>:<span class="Sec">00</span>:<span class="HSec">00</span>
 				</div>
 			</div>
 			<div class="gameContainer">
 				<div class="plateContainer">
-					
+					<div class="MenuContainer AppearAnimation">
+						<div class="MenuBackground"></div>
+						<div class="MenuContent">
+							<div class="yourScore">
+								Your Score : <span class="yourCurrentScore">0000</span>
+							</div>
+							<div class="MenuItems PopAnimated">
+								<div class="menuItem" data-action="New">New Game</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		
 		<script src="js/variables.js" type="text/javascript"></script>
-		<script src="js/TimeHandler.js" type="text/javascript"></script>
 		<script src="js/util.js" type="text/javascript"></script>
+		<script src="js/TimeHandler.js" type="text/javascript"></script>
+		<script src="js/MenuHandler.js" type="text/javascript"></script>
+		<script src="js/score.js" type="text/javascript"></script>
 		<script src="js/mouselistener.js" type="text/javascript"></script>
 		<script src="js/lineCreator.js" type="text/javascript"></script>
 		<script src="js/nodeCreator.js" type="text/javascript"></script>
 		<script src="js/structure.js"type="text/javascript"></script>		
 		<script src="js/gameLevels.js" type="text/javascript"></script>
+		<script src="js/turnsHanlder.js" type="text/javascript"></script>
+		<script src="js/gameHandler.js" type="text/javascript"></script>
+		<script src="js/game.js" type="text/javascript"></script>
 	</body>
 </html>

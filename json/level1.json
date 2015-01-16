@@ -25,5 +25,11 @@
 		"node1-node2",
 		"node1-node3",
 		"node2-node3"
-	]
+	],
+	"Time": {
+		"M":12,
+		"S":12,
+		"HS":12
+	},
+	"Turns":2
 }

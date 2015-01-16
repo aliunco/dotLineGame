@@ -7,19 +7,22 @@ function LevelStructure(){
 LevelStructure.prototype.getJson = function(){
 	var ImportingJson = function(data){
 		LevelJson = data;
+		UserTurns = LevelJson.Turns;
 		LevelSuper.ImportNodesInPlate();
 		LevelSuper.ImportingPreviewLines();
+		LevelSuper.SaveTheGame();
+		LevelSuper.SetTurns();
 	}
 	loadJSON(this.levesAdress + 'level' + this.currentLevel + '.json', ImportingJson);
-	this.SaveTheGame();
-}
-LevelStructure.prototype.LevelPreview = function(){
-
 }
 LevelStructure.prototype.ImportNodesInPlate = function(){
 	for(var Thisnode in LevelJson.nodes){
 		window[Thisnode] = new NewNode(nodePlaces[LevelJson.nodes[Thisnode].X][LevelJson.nodes[Thisnode].Y][0], nodePlaces[LevelJson.nodes[Thisnode].X][LevelJson.nodes[Thisnode].Y][1], plate, Thisnode);
 	}
+}
+LevelStructure.prototype.SetTurns = function(){
+	ThisUserTurns = new TurnHandler();
+	ThisUserTurns.SetTurn();
 }
 LevelStructure.prototype.ClearNodes = function(){
 	for (var Thisnode in LevelJson.nodes) {

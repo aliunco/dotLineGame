@@ -9,3 +9,4 @@ var levelDefault = 1;
 var LevelJson;
 var mouse;
 var draginig = false;
+var UserTurns;

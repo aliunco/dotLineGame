@@ -7,6 +7,7 @@ function GameStructure(){
 		var target = mouseClickAct.target || mouseClickAct.srcElement;
 		if(target.className.indexOf("nodeStyle") != -1){
 			draginig = true;
+			UserTurns--;
 			var nodeName = target.getAttribute("objNAme");
 			var XPos = target.offsetLeft + 10;
 			var YPos = target.offsetTop + 5;
@@ -115,4 +116,3 @@ GameStructure.prototype.ShineTheSolution = function(){
 GameStructure.prototype.StartForNewLevel = function(){
 	mouse.MouseListenersOn();
 }
-var structure = new GameStructure(); 

@@ -9,7 +9,7 @@ function NewNode(X, Y, plate, nodeName){
 	this.createNode();
 }
 NewNode.prototype.createNode = function(){
-	this.ThisNode.className = "nodeStyle";
+	this.ThisNode.className = "nodeStyle PopAnimated";
 	this.plate.appendChild(this.ThisNode);
 	this.ThisNode.setAttribute("objName", this.nodeName);
 	this.ThisNode.addEventListener("mouseover", this.nearToSelected);
