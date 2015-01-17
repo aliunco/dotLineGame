@@ -12,6 +12,7 @@ LevelStructure.prototype.getJson = function(){
 		LevelSuper.ImportingPreviewLines();
 		LevelSuper.SaveTheGame();
 		LevelSuper.SetTurns();
+		LevelsTime = LevelJson.Time.M * 6000 + LevelJson.Time.S * 100 + LevelJson.Time.HS;
 	}
 	loadJSON(this.levesAdress + 'level' + this.currentLevel + '.json', ImportingJson);
 }

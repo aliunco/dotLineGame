@@ -10,3 +10,4 @@ var LevelJson;
 var mouse;
 var draginig = false;
 var UserTurns;
+var LevelsTime = 0;
