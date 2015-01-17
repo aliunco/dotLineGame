@@ -2,12 +2,13 @@ function GameStructure(){
 	mouse = new MouseListener(plate); 
 	this.FuncAfterWin = "";
 	this.FuncAfterLoose = "";
+	this.TurnPassed = "";
+	this.DrawAtLeastAlineInATurn = false;
 	SuperStruture = this;
 	var mouseclick = function(mouseClickAct){
 		var target = mouseClickAct.target || mouseClickAct.srcElement;
 		if(target.className.indexOf("nodeStyle") != -1){
 			draginig = true;
-			UserTurns--;
 			var nodeName = target.getAttribute("objNAme");
 			var XPos = target.offsetLeft + 10;
 			var YPos = target.offsetTop + 5;
@@ -15,6 +16,7 @@ function GameStructure(){
 			eval(nodeName).selected();
 			prevNode = nodeName;
 			passedNodes.push(prevNode);
+			SuperStruture.DrawAtLeastAlineInATurn = false;
 		}
 	}
 	var mousemovefunc = function(mouseMovePlace){
@@ -38,6 +40,7 @@ function GameStructure(){
 							lines[nodeName] = new newLine(nodeXPos, nodeYPos, plate);
 							DrewLines.push(prevNode+nodeName);
 							prevNode = nodeName;
+							SuperStruture.DrawAtLeastAlineInATurn = true;
 						}
 					}
 				}else{
@@ -60,6 +63,11 @@ function GameStructure(){
 			draginig = false;
 			if (!SuperStruture.checkSolution()) {
 				clearPrevLine();
+				if (SuperStruture.DrawAtLeastAlineInATurn == true) {
+					if (typeof(SuperStruture.TurnPassed) != "undefined" && typeof(SuperStruture.TurnPassed) == "function") {
+						SuperStruture.TurnPassed();
+					}
+				}
 			}
 			for (var i = passedNodes.length - 1; i >= 0; i--) {
 				var thisNodeIsIncluded = false;

@@ -20,3 +20,6 @@ MenuHandler.prototype.OpenTheMenu = function(){
 MenuHandler.prototype.CloseTheMenu = function(){
 	this.MenuContainer.style.display = "none";
 }
+MenuHandler.prototype.MenuMessage = function(){
+	
+}

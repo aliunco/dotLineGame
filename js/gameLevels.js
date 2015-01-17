@@ -37,7 +37,6 @@ LevelStructure.prototype.ClearLines = function(){
 }
 LevelStructure.prototype.ImportingPreviewLines = function(){
 	for (var i = LevelJson.lines.length - 1; i >= 0; i--) {
-		$log.info(LevelJson.lines[i]);
 		var StartNode = LevelJson.lines[i].split("-")[0];
 		var EndNode = LevelJson.lines[i].split("-")[1];
 		var ThisSampleLine = new newLine(window[StartNode].NodeX + 10, window[StartNode].NodeY + 5, plate);
