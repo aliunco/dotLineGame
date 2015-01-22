@@ -1,2 +1,2 @@
 var OuilerGame = new Game();
-OuilerGame.startGame();
+// OuilerGame.startGame();
