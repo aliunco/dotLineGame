@@ -88,30 +88,38 @@ Object.defineProperty(Array.prototype, "remove", {
     }
 });
 // ------------------ de duplicate in array objects -------------
-Array.prototype.unique = function() {
-    var a = this.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j--, 1);
-        }
-    }
-    return a;
-};
+// Array.prototype.unique = function() {
+//     var a = this.concat();
+//     for(var i=0; i<a.length; ++i) {
+//         for(var j=i+1; j<a.length; ++j) {
+//             if(a[i] === a[j])
+//                 a.splice(j--, 1);
+//         }
+//     }
+//     return a;
+// };
 function CheckHasSameValues(ArrayOne, ArrayTwo){
     var TempArr = ArrayOne.concat(ArrayTwo);
     return TempArr.HasDuplicate()
 }
-// --------------- check if an array has duplicated vaue ------------
-Array.prototype.HasDuplicate = function() {
-    var a = this.concat();
-    var result = false;
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j]){
-                result = true;
-            }
-        }
-    }
-    return result;
-};
+// --------------- check if an array has duplicated value ------------
+// Array.prototype.HasDuplicate = function() {
+//     var a = this.concat();
+//     var result = false;
+//     for(var i=0; i<a.length; ++i) {
+//         for(var j=i+1; j<a.length; ++j) {
+//             if(a[i] === a[j]){
+//                 result = true;
+//             }
+//         }
+//     }
+//     return result;
+// };
+// -------------- check file existance of file ----------------
+function UrlExists(url)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    return http.status!=404;
+}

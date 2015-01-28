@@ -14,7 +14,18 @@ LevelStructure.prototype.getJson = function(){
 		LevelSuper.SetTurns();
 		LevelsTime = LevelJson.Time.M * 6000 + LevelJson.Time.S * 100 + LevelJson.Time.HS;
 	}
-	loadJSON(this.levesAdress + 'level' + this.currentLevel + '.json', ImportingJson);
+	if (UrlExists(this.levesAdress + 'level' + this.currentLevel + '.json')) {
+		loadJSON(this.levesAdress + 'level' + this.currentLevel + '.json', ImportingJson);
+	}else{
+		var LevelGenerate = new Generator(this.currentLevel);
+		LevelGenerate.GeneratLevel();
+		var CheckLive = setInterval(function(){
+			if (LevelGenerate.InProgress == false) {
+				clearInterval(CheckLive);
+				ImportingJson(LevelGenerate.LevelObj);
+			};
+		},200)
+	}
 }
 LevelStructure.prototype.ImportNodesInPlate = function(){
 	for(var Thisnode in LevelJson.nodes){
@@ -28,10 +39,13 @@ LevelStructure.prototype.SetTurns = function(){
 LevelStructure.prototype.ClearNodes = function(){
 	for (var Thisnode in LevelJson.nodes) {
 		window[Thisnode].deleteNode();
+		delete window[Thisnode];
 	}
 }
 LevelStructure.prototype.ClearLines = function(){
 	for (var ThisLine in lines) {
+		$log.info(lines[ThisLine])
+
 		lines[ThisLine].deleteLine();
 		delete lines[ThisLine];
 	};
@@ -59,13 +73,13 @@ LevelStructure.prototype.SaveTheGame = function(){
 LevelStructure.prototype.LevelClearance = function(){
 	this.ClearNodes();
 	this.ClearLines();
+	passedNodes = [];
+	DrewLines = [];
 	for (var i = document.getElementsByClassName("PreviewLines").length - 1; i >= 0; i--) {
 		document.getElementsByClassName("PreviewLines")[i].parentElement.removeChild(document.getElementsByClassName("PreviewLines")[i]);
 	}
 }
 LevelStructure.prototype.ResetLevel = function(){
-	passedNodes = [];
-	DrewLines = [];
 	this.LevelClearance();
 	this.getJson();
 }

@@ -5,6 +5,7 @@ function Generator(Difficulty){
 	this.LevelObj.lines = [];
 	this.LevelObj.Time = {};
 	this.LevelObj.Turns = 1;
+	this.InProgress = true; 
 	if (typeof(Difficulty) == "undefined") {
 		$log.error("you should declare a Difficulty in initialization");
 		delete this;
@@ -41,7 +42,7 @@ Generator.prototype.generateLines = function(){
 	var MinLineNums = this.Difficulty - 1;
 	var RandLineNum = Math.floor(Math.random() * (MaxLineNums - MinLineNums + 1)) + MinLineNums;
 	function RandNodeForLine(){
-		return 'node' + (Math.floor(Math.random() * SuperGenrator.Difficulty) + 0);
+		return 'node' + (Math.floor(Math.random() * SuperGenrator.Difficulty) + 1);
 	}
 	function AddNewLine(){
 		for (var j = 0; j >= 0; j--) {
@@ -62,9 +63,9 @@ Generator.prototype.generateLines = function(){
 		AddNewLine();
 		// $log.info(i);
 	};
-	$log.info("done");
 	while(1){
 		if (this.NoIsolatedNode()) {
+			this.InProgress = false;
 			break;
 		}else{
 			AddNewLine();
@@ -74,7 +75,7 @@ Generator.prototype.generateLines = function(){
 Generator.prototype.NoIsolatedNode = function(){
 	var result = true;
 	// $log.info(this.Difficulty);
-	for (var j = this.Difficulty - 1; j >= 0; j--) {
+	for (var j = this.Difficulty; j >= 1; j--) {
 		var ResultsForThisNode = [];
 		for (var i = this.LevelObj.lines.length - 1; i >= 0; i--) {
 			var LineNodes = this.LevelObj.lines[i].split("-");
@@ -92,7 +93,10 @@ Generator.prototype.NoIsolatedNode = function(){
 	return result;
 }
 Generator.prototype.EstimateTime = function(){
-	this.LevelObj.Time = (this.LevelObj.lines.length * 5) + 5;
+	var LevelSecs = (this.LevelObj.lines.length * 5) + 5;
+	this.LevelObj.Time.M = Math.floor(LevelSecs/60);
+	this.LevelObj.Time.S = LevelSecs - (this.LevelObj.Time.M * 60);
+	this.LevelObj.Time.HS = 0; 	
 }
 Generator.prototype.EstimateTurns = function(){
 	var NodesLevels = [];
